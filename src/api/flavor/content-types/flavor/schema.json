@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "origins",
+  "collectionName": "flavors",
   "info": {
-    "singularName": "origin",
-    "pluralName": "origins",
-    "displayName": "Origin"
+    "singularName": "flavor",
+    "pluralName": "flavors",
+    "displayName": "Flavor"
   },
   "options": {
     "draftAndPublish": true
@@ -15,10 +15,6 @@
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "desc": {
-      "type": "text",
-      "required": true
     }
   }
 }

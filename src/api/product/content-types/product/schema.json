@@ -11,10 +11,95 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "pid": {
+      "type": "uid",
+      "required": true
+    },
     "name": {
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "english_name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "origin": {
+      "type": "string",
+      "required": true
+    },
+    "region": {
+      "type": "string",
+      "required": false
+    },
+    "processing": {
+      "type": "string",
+      "required": true
+    },
+    "roast": {
+      "type": "string",
+      "required": true
+    },
+    "flavor_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::flavor.flavor"
+    },
+    "acidity": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 5
+    },
+    "sweetness": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 5
+    },
+    "body": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 5
+    },
+    "aftertaste": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 5
+    },
+    "clarity": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 5
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "popularity": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 5
+    },
+    "price": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "stock": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "weight": {
+      "type": "string",
+      "default": "250g",
+      "required": true
     },
     "img": {
       "type": "media",
@@ -23,15 +108,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "price": {
-      "type": "integer",
-      "required": true
-    },
-    "origin": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::origin.origin"
     }
   }
 }
