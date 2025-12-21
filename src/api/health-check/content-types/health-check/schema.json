@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "health_checks",
+  "info": {
+    "singularName": "health-check",
+    "pluralName": "health-checks",
+    "displayName": "HealthCheck"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "health": {
+      "type": "boolean",
+      "private": true,
+      "required": true,
+      "default": true
+    }
+  }
+}
