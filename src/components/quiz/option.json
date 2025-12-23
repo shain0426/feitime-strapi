@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_quiz_options",
+  "info": {
+    "displayName": "option",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "key": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "helper": {
+      "type": "text"
+    },
+    "acidity": {
+      "type": "integer"
+    },
+    "sweetness": {
+      "type": "integer"
+    },
+    "body": {
+      "type": "integer"
+    },
+    "aftertaste": {
+      "type": "integer"
+    },
+    "clarity": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}
