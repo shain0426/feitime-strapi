@@ -41,6 +41,16 @@
       "type": "string",
       "required": true
     },
+    "flavor_type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Fruity",
+        "Floral",
+        "Nutty",
+        "Bold"
+      ]
+    },
     "flavor_tags": {
       "type": "relation",
       "relation": "oneToMany",

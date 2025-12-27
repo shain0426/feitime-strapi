@@ -546,6 +546,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     flavor_tags: Schema.Attribute.Relation<'oneToMany', 'api::flavor.flavor'>;
+    flavor_type: Schema.Attribute.Enumeration<
+      ['Fruity', 'Floral', 'Nutty', 'Bold']
+    > &
+      Schema.Attribute.Required;
     img: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
