@@ -77,10 +77,15 @@
     },
     "user_role": {
       "type": "enumeration",
+      "default": "Member",
       "enum": [
         "Admin",
         "Member"
       ]
+    },
+    "user_id": {
+      "type": "string",
+      "unique": true
     }
   }
 }

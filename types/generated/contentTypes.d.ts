@@ -1133,7 +1133,9 @@ export interface PluginUsersPermissionsUser
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_role: Schema.Attribute.Enumeration<['Admin', 'Member']>;
+    user_id: Schema.Attribute.String & Schema.Attribute.Unique;
+    user_role: Schema.Attribute.Enumeration<['Admin', 'Member']> &
+      Schema.Attribute.DefaultTo<'Member'>;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
