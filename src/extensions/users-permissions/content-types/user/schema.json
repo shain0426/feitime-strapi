@@ -86,6 +86,12 @@
     "user_id": {
       "type": "string",
       "unique": true
+    },
+    "cart_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cart-item.cart-item",
+      "mappedBy": "user"
     }
   }
 }
