@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "login_logs",
+  "info": {
+    "singularName": "login-log",
+    "pluralName": "login-logs",
+    "displayName": "Login Logs"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "login_logs"
+    },
+    "login_ip": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "string"
+    },
+    "login_status": {
+      "type": "enumeration",
+      "enum": [
+        "success",
+        "password_error",
+        "account_locked"
+      ]
+    }
+  }
+}

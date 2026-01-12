@@ -430,10 +430,58 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBrewLogBrewLog extends Struct.CollectionTypeSchema {
+  collectionName: 'brew_logs';
+  info: {
+    displayName: 'Brew Logs';
+    pluralName: 'brew-logs';
+    singularName: 'brew-log';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ai_feedback: Schema.Attribute.Text;
+    bean_roast: Schema.Attribute.Decimal;
+    brew_img: Schema.Attribute.String;
+    brew_time: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dose_weight: Schema.Attribute.Decimal;
+    extraction_yield: Schema.Attribute.Decimal;
+    flavor_radar: Schema.Attribute.JSON;
+    grind_level: Schema.Attribute.Decimal;
+    hardware_setup: Schema.Attribute.JSON;
+    is_public: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::brew-log.brew-log'
+    > &
+      Schema.Attribute.Private;
+    pour_count: Schema.Attribute.Integer;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    timeline_events: Schema.Attribute.JSON;
+    title: Schema.Attribute.String;
+    total_water: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    user_rating: Schema.Attribute.Integer;
+    water_temp: Schema.Attribute.Integer;
+  };
+}
+
 export interface ApiCartItemCartItem extends Struct.CollectionTypeSchema {
   collectionName: 'cart_items';
   info: {
-    displayName: 'Cart Item';
+    displayName: 'Cart Items';
     pluralName: 'cart-items';
     singularName: 'cart-item';
   };
@@ -466,6 +514,46 @@ export interface ApiCartItemCartItem extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     user: Schema.Attribute.Relation<
       'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiCoffeeResultCoffeeResult
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'coffee_results';
+  info: {
+    displayName: 'Coffee Results';
+    pluralName: 'coffee-results';
+    singularName: 'coffee-result';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    acidity: Schema.Attribute.Integer;
+    aftertaste: Schema.Attribute.Integer;
+    body: Schema.Attribute.Integer;
+    clarity: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::coffee-result.coffee-result'
+    > &
+      Schema.Attribute.Private;
+    persona_image: Schema.Attribute.String;
+    persona_name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sweetness: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
       'plugin::users-permissions.user'
     >;
   };
@@ -532,6 +620,89 @@ export interface ApiHealthCheckHealthCheck extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLoginLogLoginLog extends Struct.CollectionTypeSchema {
+  collectionName: 'login_logs';
+  info: {
+    displayName: 'Login Logs';
+    pluralName: 'login-logs';
+    singularName: 'login-log';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::login-log.login-log'
+    > &
+      Schema.Attribute.Private;
+    login_ip: Schema.Attribute.String;
+    login_status: Schema.Attribute.Enumeration<
+      ['success', 'password_error', 'account_locked']
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    user_agent: Schema.Attribute.String;
+  };
+}
+
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    displayName: 'Orders';
+    pluralName: 'orders';
+    singularName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customer_note: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    order_items: Schema.Attribute.Component<'order.items', true>;
+    order_number: Schema.Attribute.String;
+    order_status: Schema.Attribute.Enumeration<
+      ['pending', 'paid', 'processing', 'shipped', 'delivered', 'cancelled']
+    >;
+    paid_at: Schema.Attribute.DateTime;
+    payment_status: Schema.Attribute.Enumeration<
+      ['unpaid', 'paid', 'refunded']
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    recipient_address: Schema.Attribute.String;
+    recipient_name: Schema.Attribute.String;
+    recipient_phone: Schema.Attribute.String;
+    shipped_at: Schema.Attribute.DateTime;
+    shipping_fee: Schema.Attribute.Decimal;
+    shipping_method: Schema.Attribute.String;
+    subtotal: Schema.Attribute.Decimal;
+    total_amount: Schema.Attribute.Decimal;
+    tracking_number: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -570,6 +741,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    brew_logs: Schema.Attribute.Relation<'oneToMany', 'api::brew-log.brew-log'>;
     cart_items: Schema.Attribute.Relation<
       'oneToMany',
       'api::cart-item.cart-item'
@@ -626,8 +798,12 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       >;
     processing: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    recommend_grind: Schema.Attribute.Decimal;
+    recommend_ratio: Schema.Attribute.Decimal;
+    recommend_temp: Schema.Attribute.Integer;
     region: Schema.Attribute.String;
     roast: Schema.Attribute.String & Schema.Attribute.Required;
+    simulation_preset: Schema.Attribute.JSON;
     stock: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
@@ -1144,9 +1320,14 @@ export interface PluginUsersPermissionsUser
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    brew_logs: Schema.Attribute.Relation<'oneToMany', 'api::brew-log.brew-log'>;
     cart_items: Schema.Attribute.Relation<
       'oneToMany',
       'api::cart-item.cart-item'
+    >;
+    coffee_id: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::coffee-result.coffee-result'
     >;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1164,6 +1345,11 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    login_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::login-log.login-log'
+    >;
+    orders: Schema.Attribute.Relation<'oneToMany', 'api::order.order'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1178,7 +1364,6 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     shipping_address: Schema.Attribute.String;
-    shipping_postal_code: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1205,9 +1390,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::brew-log.brew-log': ApiBrewLogBrewLog;
       'api::cart-item.cart-item': ApiCartItemCartItem;
+      'api::coffee-result.coffee-result': ApiCoffeeResultCoffeeResult;
       'api::flavor.flavor': ApiFlavorFlavor;
       'api::health-check.health-check': ApiHealthCheckHealthCheck;
+      'api::login-log.login-log': ApiLoginLogLoginLog;
+      'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::question.question': ApiQuestionQuestion;
       'plugin::content-releases.release': PluginContentReleasesRelease;

@@ -119,10 +119,28 @@
         "images"
       ]
     },
+    "recommend_grind": {
+      "type": "decimal"
+    },
+    "recommend_temp": {
+      "type": "integer"
+    },
+    "recommend_ratio": {
+      "type": "decimal"
+    },
+    "simulation_preset": {
+      "type": "json"
+    },
     "cart_items": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::cart-item.cart-item",
+      "mappedBy": "product"
+    },
+    "brew_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::brew-log.brew-log",
       "mappedBy": "product"
     }
   }

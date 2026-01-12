@@ -72,9 +72,6 @@
     "shipping_address": {
       "type": "string"
     },
-    "shipping_postal_code": {
-      "type": "string"
-    },
     "user_role": {
       "type": "enumeration",
       "default": "Member",
@@ -87,10 +84,34 @@
       "type": "string",
       "unique": true
     },
+    "coffee_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::coffee-result.coffee-result",
+      "mappedBy": "user"
+    },
+    "brew_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::brew-log.brew-log",
+      "mappedBy": "user"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "user"
+    },
     "cart_items": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::cart-item.cart-item",
+      "mappedBy": "user"
+    },
+    "login_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::login-log.login-log",
       "mappedBy": "user"
     }
   }

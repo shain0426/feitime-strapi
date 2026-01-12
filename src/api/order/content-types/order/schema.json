@@ -1,0 +1,81 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Orders"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order_number": {
+      "type": "string"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
+    },
+    "order_items": {
+      "type": "component",
+      "component": "order.items",
+      "repeatable": true
+    },
+    "subtotal": {
+      "type": "decimal"
+    },
+    "shipping_fee": {
+      "type": "decimal"
+    },
+    "total_amount": {
+      "type": "decimal"
+    },
+    "order_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "paid",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled"
+      ]
+    },
+    "payment_status": {
+      "type": "enumeration",
+      "enum": [
+        "unpaid",
+        "paid",
+        "refunded"
+      ]
+    },
+    "paid_at": {
+      "type": "datetime"
+    },
+    "recipient_name": {
+      "type": "string"
+    },
+    "recipient_phone": {
+      "type": "string"
+    },
+    "recipient_address": {
+      "type": "string"
+    },
+    "customer_note": {
+      "type": "text"
+    },
+    "shipping_method": {
+      "type": "string"
+    },
+    "tracking_number": {
+      "type": "string"
+    },
+    "shipped_at": {
+      "type": "datetime"
+    }
+  }
+}

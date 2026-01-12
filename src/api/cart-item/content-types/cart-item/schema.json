@@ -4,7 +4,7 @@
   "info": {
     "singularName": "cart-item",
     "pluralName": "cart-items",
-    "displayName": "Cart Item"
+    "displayName": "Cart Items"
   },
   "options": {
     "draftAndPublish": true

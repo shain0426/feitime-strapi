@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_order_items",
+  "info": {
+    "displayName": "items"
+  },
+  "options": {},
+  "attributes": {
+    "pid": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "snapshot_name": {
+      "type": "string"
+    },
+    "snapshot_price": {
+      "type": "decimal"
+    },
+    "snapshot_image": {
+      "type": "string"
+    },
+    "snapshot_weight": {
+      "type": "string"
+    },
+    "item_total": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}

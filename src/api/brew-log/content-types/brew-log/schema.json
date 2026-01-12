@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "brew_logs",
+  "info": {
+    "singularName": "brew-log",
+    "pluralName": "brew-logs",
+    "displayName": "Brew Logs"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "brew_logs"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "brew_logs"
+    },
+    "title": {
+      "type": "string"
+    },
+    "hardware_setup": {
+      "type": "json"
+    },
+    "bean_roast": {
+      "type": "decimal"
+    },
+    "grind_level": {
+      "type": "decimal"
+    },
+    "water_temp": {
+      "type": "integer"
+    },
+    "dose_weight": {
+      "type": "decimal"
+    },
+    "total_water": {
+      "type": "decimal"
+    },
+    "pour_count": {
+      "type": "integer"
+    },
+    "brew_time": {
+      "type": "integer"
+    },
+    "timeline_events": {
+      "type": "json"
+    },
+    "extraction_yield": {
+      "type": "decimal"
+    },
+    "flavor_radar": {
+      "type": "json"
+    },
+    "ai_feedback": {
+      "type": "text"
+    },
+    "user_rating": {
+      "type": "integer"
+    },
+    "brew_img": {
+      "type": "string"
+    },
+    "is_public": {
+      "type": "boolean"
+    }
+  }
+}

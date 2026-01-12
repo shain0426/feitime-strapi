@@ -132,72 +132,72 @@ export default {
       },
     });
 
-    // 🕐 定時任務：每 5 分鐘檢查一次超時訂單
-    setInterval(
-      async () => {
-        try {
-          // 1️⃣ 計算 30 分鐘前的時間點
-          const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+    // // 🕐 定時任務：每 5 分鐘檢查一次超時訂單
+    // setInterval(
+    //   async () => {
+    //     try {
+    //       // 1️⃣ 計算 30 分鐘前的時間點
+    //       const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
 
-          // 2️⃣ 查詢超過 30 分鐘且未付款的訂單
-          const expiredOrders = await strapi.db
-            .query("api::order.order")
-            .findMany({
-              where: {
-                createdAt: {
-                  $lt: thirtyMinutesAgo.toISOString(), // 小於 30 分鐘前
-                },
-                status: "pending", // 未付款狀態
-              },
-              populate: ["items"], // 需要訂單項目資料來恢復庫存
-            });
+    //       // 2️⃣ 查詢超過 30 分鐘且未付款的訂單
+    //       const expiredOrders = await strapi.db
+    //         .query("api::order.order")
+    //         .findMany({
+    //           where: {
+    //             createdAt: {
+    //               $lt: thirtyMinutesAgo.toISOString(), // 小於 30 分鐘前
+    //             },
+    //             status: "pending", // 未付款狀態
+    //           },
+    //           populate: ["items"], // 需要訂單項目資料來恢復庫存
+    //         });
 
-          if (expiredOrders.length > 0) {
-            console.log(
-              `🕐 發現 ${expiredOrders.length} 筆超時訂單，開始處理...`
-            );
+    //       if (expiredOrders.length > 0) {
+    //         console.log(
+    //           `🕐 發現 ${expiredOrders.length} 筆超時訂單，開始處理...`
+    //         );
 
-            // 3️⃣ 處理每一筆超時訂單
-            for (const order of expiredOrders) {
-              // 🔸 更新訂單狀態為已取消
-              await strapi.db.query("api::order.order").update({
-                where: { id: order.id },
-                data: { status: "cancelled" },
-              });
+    //         // 3️⃣ 處理每一筆超時訂單
+    //         for (const order of expiredOrders) {
+    //           // 🔸 更新訂單狀態為已取消
+    //           await strapi.db.query("api::order.order").update({
+    //             where: { id: order.id },
+    //             data: { status: "cancelled" },
+    //           });
 
-              // 🔸 恢復庫存
-              if (order.items && order.items.length > 0) {
-                for (const item of order.items) {
-                  // 取得商品資料
-                  const product = await strapi.db
-                    .query("api::product.product")
-                    .findOne({
-                      where: { id: item.product_id }, // ⚠️ 請確認你的欄位名稱
-                    });
+    //           // 🔸 恢復庫存
+    //           if (order.items && order.items.length > 0) {
+    //             for (const item of order.items) {
+    //               // 取得商品資料
+    //               const product = await strapi.db
+    //                 .query("api::product.product")
+    //                 .findOne({
+    //                   where: { id: item.product_id }, // ⚠️ 請確認你的欄位名稱
+    //                 });
 
-                  if (product) {
-                    // 恢復庫存數量
-                    await strapi.db.query("api::product.product").update({
-                      where: { id: product.id },
-                      data: {
-                        stock: product.stock + item.quantity, // ⚠️ 請確認你的欄位名稱
-                      },
-                    });
-                  }
-                }
-              }
+    //               if (product) {
+    //                 // 恢復庫存數量
+    //                 await strapi.db.query("api::product.product").update({
+    //                   where: { id: product.id },
+    //                   data: {
+    //                     stock: product.stock + item.quantity, // ⚠️ 請確認你的欄位名稱
+    //                   },
+    //                 });
+    //               }
+    //             }
+    //           }
 
-              console.log(`✅ 訂單 ${order.order_number} 已取消並恢復庫存`);
-            }
-          }
-        } catch (error) {
-          console.error("❌ 處理超時訂單時發生錯誤:", error);
-        }
-      },
-      5 * 60 * 1000
-    ); // 每 5 分鐘 = 300,000 毫秒
+    //           console.log(`✅ 訂單 ${order.order_number} 已取消並恢復庫存`);
+    //         }
+    //       }
+    //     } catch (error) {
+    //       console.error("❌ 處理超時訂單時發生錯誤:", error);
+    //     }
+    //   },
+    //   5 * 60 * 1000
+    // ); // 每 5 分鐘 = 300,000 毫秒
 
-    console.log("🚀 User ID & Order Number generators are ready!");
-    console.log("🕐 Order timeout checker started (runs every 5 minutes)");
+    // console.log("🚀 User ID & Order Number generators are ready!");
+    // console.log("🕐 Order timeout checker started (runs every 5 minutes)");
   },
 };
