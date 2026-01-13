@@ -53,6 +53,9 @@
         "refunded"
       ]
     },
+    "payment_method": {
+      "type": "string"
+    },
     "paid_at": {
       "type": "datetime"
     },

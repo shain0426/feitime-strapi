@@ -680,6 +680,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       ['pending', 'paid', 'processing', 'shipped', 'delivered', 'cancelled']
     >;
     paid_at: Schema.Attribute.DateTime;
+    payment_method: Schema.Attribute.String;
     payment_status: Schema.Attribute.Enumeration<
       ['unpaid', 'paid', 'refunded']
     >;
