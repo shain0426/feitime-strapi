@@ -1375,7 +1375,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetMinMaxLength<{
-        minLength: 3;
+        minLength: 2;
       }>;
   };
 }
