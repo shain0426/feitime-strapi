@@ -24,14 +24,7 @@
       "inversedBy": "cart_items"
     },
     "snapshot_image": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "type": "text"
     },
     "snapshot_name": {
       "type": "string"

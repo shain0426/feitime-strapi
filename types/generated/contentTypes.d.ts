@@ -502,10 +502,7 @@ export interface ApiCartItemCartItem extends Struct.CollectionTypeSchema {
     product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     quantity: Schema.Attribute.Integer;
-    snapshot_image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    snapshot_image: Schema.Attribute.Text;
     snapshot_name: Schema.Attribute.String;
     snapshot_price: Schema.Attribute.Decimal;
     snapshot_weight: Schema.Attribute.String;
