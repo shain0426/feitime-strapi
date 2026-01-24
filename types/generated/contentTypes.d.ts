@@ -698,6 +698,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    UUID: Schema.Attribute.String & Schema.Attribute.Unique;
   };
 }
 

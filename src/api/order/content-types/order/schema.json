@@ -79,6 +79,10 @@
     },
     "shipped_at": {
       "type": "datetime"
+    },
+    "UUID": {
+      "type": "string",
+      "unique": true
     }
   }
 }
